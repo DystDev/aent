@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar.js';
+import Home from './screens/Home';
 
 function App() {
   return (
@@ -13,10 +14,6 @@ function App() {
     </Router>
   );
 }
-
-const Home = () => {
-  return <h1>Home here!</h1>;
-};
 
 const About = () => {
   return <h1>About me... shit idk</h1>;
