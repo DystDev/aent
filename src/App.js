@@ -2,16 +2,23 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar.js';
 import Home from './screens/Home';
+import { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/about" element={<About />} />
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Navbar setSearchTerm={setSearchTerm} />
+        <Routes>
+          <Route path="/about" element={<About />} />
+          <Route path="/" element={<Home searchTerm={searchTerm} />} />
+        </Routes>
+      </Router>
+      <ToastContainer />
+    </>
   );
 }
 
