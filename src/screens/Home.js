@@ -1,22 +1,39 @@
 import { AccentCard } from '../components/AccentCard';
 import d from '../data/accentData';
 import '../App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Home = (props) => {
   const searchTerm = props.searchTerm;
 
   const [savedAccentNames, setSavedAccentNames] = useState([]);
 
+  useEffect(() => {
+    const oldData = JSON.parse(localStorage.getItem('storedFavourites'));
+    if (oldData !== null) {
+      setSavedAccentNames(oldData);
+    } else {
+      localStorage.setItem('storedFavourites', JSON.stringify([]));
+    }
+  }, [setSavedAccentNames]);
+
   const addToSavedAccents = (accentName) => {
     if (savedAccentNames.includes(accentName) === false) {
-      setSavedAccentNames((oldArr) => [...oldArr, accentName]);
+      const old = savedAccentNames;
+      setSavedAccentNames([...old, accentName]);
+      localStorage.setItem(
+        'storedFavourites',
+        JSON.stringify([...old, accentName])
+      );
     }
   };
 
   const removeFromSavedAccents = (accentName) => {
-    setSavedAccentNames((oldArr) =>
-      oldArr.filter((item) => item !== accentName)
+    const old = savedAccentNames;
+    setSavedAccentNames(old.filter((item) => item !== accentName));
+    localStorage.setItem(
+      'storedFavourites',
+      JSON.stringify(old.filter((item) => item !== accentName))
     );
   };
 
@@ -28,6 +45,7 @@ const Home = (props) => {
         key={i}
         addMe={addToSavedAccents}
         removeMe={removeFromSavedAccents}
+        active={savedAccentNames.includes(accent.name)}
       />
     );
   });
@@ -41,8 +59,8 @@ const Home = (props) => {
             .split(' ')
             .some((word) => word.toLowerCase() === searchTerm.toLowerCase())
         ) ||
-        accent.aliases.some(
-          (alias) => alias.toLowerCase() === searchTerm.toLowerCase()
+        accent.aliases.some((alias) =>
+          alias.toLowerCase().startsWith(searchTerm.toLowerCase())
         )
       );
     })
@@ -54,6 +72,7 @@ const Home = (props) => {
           key={i}
           addMe={addToSavedAccents}
           removeMe={removeFromSavedAccents}
+          active={savedAccentNames.includes(accent.name)}
         />
       );
     });
@@ -86,6 +105,7 @@ const Home = (props) => {
                 key={i}
                 addMe={addToSavedAccents}
                 removeMe={removeFromSavedAccents}
+                active={savedAccentNames.includes(ad.name)}
               />
             );
           })

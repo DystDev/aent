@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import '../App.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 
 export const AccentCard = (props) => {
   return (
@@ -18,14 +18,25 @@ export const AccentCard = (props) => {
       >
         <h1>{props.character}</h1>
         <h2>{props.name}</h2>
-        <AiOutlineHeart
-          className="accentCardHeart"
-          onClick={(event) => {
-            props.addMe(props.name);
-            event.stopPropagation();
-          }}
-          size="3em"
-        />
+        {props.active === false ? (
+          <AiOutlineHeart
+            className="accentCardHeart"
+            onClick={(event) => {
+              props.addMe(props.name);
+              event.stopPropagation();
+            }}
+            size="3em"
+          />
+        ) : (
+          <AiFillHeart
+            className="accentCardHeart"
+            onClick={(event) => {
+              props.removeMe(props.name);
+              event.stopPropagation();
+            }}
+            size="3em"
+          />
+        )}
       </div>
     </>
   );

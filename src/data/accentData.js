@@ -45,12 +45,6 @@ const d = {
       character: 'ü',
       aliases: ['u with umlaut', 'u with dots'],
       languages: ['german']
-    },
-    {
-      name: 'u-umlaut',
-      character: 'ü',
-      aliases: ['u with umlaut', 'u with dots'],
-      languages: ['german']
     }
   ]
 };

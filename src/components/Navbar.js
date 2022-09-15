@@ -2,6 +2,14 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import Logo from './aent-c.png';
+import {
+  createTheme,
+  FormControlLabel,
+  FormGroup,
+  Switch,
+  ThemeProvider,
+  Typography
+} from '@mui/material';
 
 const Navbar = (props) => {
   const [searchQ, setSearchQ] = useState('');
@@ -10,6 +18,12 @@ const Navbar = (props) => {
     setSearchQ(e.target.value);
     props.setSearchTerm(e.target.value);
   };
+
+  const jTheme = createTheme({
+    typography: {
+      fontFamily: 'Jost'
+    }
+  });
 
   return (
     <nav className="navbar">
@@ -22,6 +36,14 @@ const Navbar = (props) => {
           About
         </Link>
       </div>
+      <ThemeProvider theme={jTheme}>
+        <FormGroup className="uppercaseSwitch">
+          <FormControlLabel
+            control={<Switch color="default" />}
+            label={<Typography>Uppercase</Typography>}
+          />
+        </FormGroup>
+      </ThemeProvider>
       <input
         type="text"
         className="searchBar"
