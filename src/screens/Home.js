@@ -1,61 +1,24 @@
 import { AccentCard } from '../components/AccentCard';
 import d from '../data/accentData';
 import '../App.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const Home = (props) => {
   const searchTerm = props.searchTerm;
-  const [savedCardList, setSavedCardList] = useState([]);
 
-  const savedData = { savedAccents: [] };
+  const [savedAccentNames, setSavedAccentNames] = useState([]);
 
   const addToSavedAccents = (accentName) => {
-    const s = JSON.parse(localStorage.getItem('savedAccents'));
-    if (s.savedAccents.includes(accentName) === false) {
-      s.savedAccents.push(accentName);
-      localStorage.setItem('savedAccents', JSON.stringify(s));
+    if (savedAccentNames.includes(accentName) === false) {
+      setSavedAccentNames((oldArr) => [...oldArr, accentName]);
     }
   };
 
   const removeFromSavedAccents = (accentName) => {
-    const s = JSON.parse(localStorage.getItem('savedAccents'));
-    if (s.savedAccents.includes(accentName) === true) {
-      s.savedAccents.splice(s.savedAccents.indexOf(accentName), 1);
-      localStorage.setItem('savedAccents', JSON.stringify(s));
-    }
-  };
-
-  if (localStorage.getItem('savedAccents') === null) {
-    localStorage.setItem('savedAccents', JSON.stringify(savedData));
-  }
-
-  useEffect(() => {
-    let savedAccentList = [];
-
-    const savedCards = JSON.parse(localStorage.getItem('savedAccents'));
-
-    for (let i = 0; i < savedCards.savedAccents.length; i++) {
-      savedAccentList.push(
-        d.accents.find((accent) => {
-          return accent.name === savedCards.savedAccents[i];
-        })
-      );
-    }
-
-    setSavedCardList(
-      savedAccentList.map((accent, i) => {
-        return (
-          <AccentCard
-            character={accent.character}
-            name={accent.name}
-            key={i}
-            addMe={addToSavedAccents}
-            removeMe={removeFromSavedAccents}
-          />
-        );
-      })
+    setSavedAccentNames((oldArr) =>
+      oldArr.filter((item) => item !== accentName)
     );
-  }, [savedAccentList]);
+  };
 
   const defaultCards = d.accents.map((accent, i) => {
     return (
@@ -97,12 +60,6 @@ const Home = (props) => {
 
   return (
     <>
-      {savedCardList.length > 0 ? (
-        <>
-          <h1 className="header">Saved Results</h1>
-          <div className="defCardContainer">{savedCardList}</div>
-        </>
-      ) : null}
       {searchTerm.length > 0 ? (
         <>
           <h1 className="header">Search Results</h1>
@@ -115,6 +72,31 @@ const Home = (props) => {
           </div>
         </>
       ) : null}
+      <h1 className="header">Saved accents</h1>
+      <div className="defCardContainer">
+        {savedAccentNames.length > 0 ? (
+          savedAccentNames.map((a, i) => {
+            const ad = d.accents.find((item) => {
+              return item.name === a;
+            });
+            return (
+              <AccentCard
+                character={ad.character}
+                name={ad.name}
+                key={i}
+                addMe={addToSavedAccents}
+                removeMe={removeFromSavedAccents}
+              />
+            );
+          })
+        ) : (
+          <p className="emphasis">
+            Hmm... it seems like you have no accents saved. Click the heart on
+            the card to find them easily across sessions.
+          </p>
+        )}
+      </div>
+
       <h1 className="header">All Accents</h1>
       <div className="defCardContainer">{defaultCards}</div>
       <h1 className="header">More stuff here</h1>
