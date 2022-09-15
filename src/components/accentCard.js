@@ -1,21 +1,32 @@
 import { toast } from 'react-toastify';
 import '../App.css';
 import 'react-toastify/dist/ReactToastify.css';
+import { AiOutlineHeart } from 'react-icons/ai';
 
 export const AccentCard = (props) => {
   return (
-    <div
-      className="accentCard"
-      onClick={() => {
-        navigator.clipboard.writeText(props.character);
-        toast(`Copied ${props.character} to the clipboard!`, {
-          draggable: true,
-          autoClose: 2000
-        });
-      }}
-    >
-      <h1>{props.character}</h1>
-      <h2>{props.name}</h2>
-    </div>
+    <>
+      <div
+        className="accentCard"
+        onClick={() => {
+          navigator.clipboard.writeText(props.character);
+          toast(`Copied ${props.character} to the clipboard!`, {
+            draggable: true,
+            autoClose: 2000
+          });
+        }}
+      >
+        <h1>{props.character}</h1>
+        <h2>{props.name}</h2>
+        <AiOutlineHeart
+          className="accentCardHeart"
+          onClick={(event) => {
+            props.addMe(props.name);
+            event.stopPropagation();
+          }}
+          size="3em"
+        />
+      </div>
+    </>
   );
 };

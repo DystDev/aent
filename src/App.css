@@ -88,3 +88,10 @@ h1.header {
   justify-content: center;
   align-items: center;
 }
+
+.accentCardHeart {
+  margin-right: 0rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  margin-left: auto;
+}
