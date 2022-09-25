@@ -122,7 +122,7 @@ const Home = (props) => {
 
       <h1 className="header">All Accents</h1>
       <div className="defCardContainer">{defaultCards}</div>
-      <h1 className="header">More stuff here</h1>
+      <h1 className="header">Made with &lt;3</h1>
     </>
   );
 };
