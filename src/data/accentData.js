@@ -37,13 +37,13 @@ const d = {
     {
       name: 'o-umlaut',
       character: 'ö',
-      aliases: ['o with umlaut', 'o with dots'],
+      aliases: ['o with umlaut', 'o with dots', 'o umlaut'],
       languages: ['german']
     },
     {
       name: 'u-umlaut',
       character: 'ü',
-      aliases: ['u with umlaut', 'u with dots'],
+      aliases: ['u with umlaut', 'u with dots', 'u umlaut'],
       languages: ['german']
     }
   ]
