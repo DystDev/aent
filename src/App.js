@@ -7,14 +7,22 @@ import { ToastContainer } from 'react-toastify';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [isUppercase, setIsUppercase] = useState(false);
+
+  const toggleUpper = () => {
+    setIsUppercase(!isUppercase);
+  };
 
   return (
     <>
       <Router>
-        <Navbar setSearchTerm={setSearchTerm} />
+        <Navbar setSearchTerm={setSearchTerm} toggleUpper={toggleUpper} />
         <Routes>
           <Route path="/about" element={<About />} />
-          <Route path="/" element={<Home searchTerm={searchTerm} />} />
+          <Route
+            path="/"
+            element={<Home searchTerm={searchTerm} isUppercase={isUppercase} />}
+          />
         </Routes>
       </Router>
       <ToastContainer />

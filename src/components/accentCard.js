@@ -4,19 +4,22 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 
 export const AccentCard = (props) => {
+  const currentCharacter = props.uppercase
+    ? props.characters[1]
+    : props.characters[0];
   return (
     <>
       <div
         className="accentCard"
         onClick={() => {
-          navigator.clipboard.writeText(props.character);
-          toast(`Copied ${props.character} to the clipboard!`, {
+          navigator.clipboard.writeText(currentCharacter);
+          toast(`Copied ${currentCharacter} to the clipboard!`, {
             draggable: true,
             autoClose: 2000
           });
         }}
       >
-        <h1>{props.character}</h1>
+        <h1>{currentCharacter}</h1>
         <h2>{props.name}</h2>
         {props.active === false ? (
           <AiOutlineHeart

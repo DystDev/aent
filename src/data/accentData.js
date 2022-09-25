@@ -14,12 +14,12 @@ const d = {
         'a acute upstroke',
         'a acute upstroke acute'
       ],
-      character: 'á',
+      characters: ['á', 'Á'],
       languages: ['french']
     },
     {
       name: 'e-aigu',
-      character: 'é',
+      characters: ['é', 'É'],
       aliases: [
         'e acute',
         'e upwards',

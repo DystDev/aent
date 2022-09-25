@@ -39,7 +39,7 @@ const Navbar = (props) => {
       <ThemeProvider theme={jTheme}>
         <FormGroup className="uppercaseSwitch">
           <FormControlLabel
-            control={<Switch color="default" />}
+            control={<Switch color="default" onChange={props.toggleUpper} />}
             label={<Typography>Uppercase</Typography>}
           />
         </FormGroup>

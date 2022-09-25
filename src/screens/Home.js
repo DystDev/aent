@@ -40,12 +40,13 @@ const Home = (props) => {
   const defaultCards = d.accents.map((accent, i) => {
     return (
       <AccentCard
-        character={accent.character}
+        characters={accent.characters}
         name={accent.name}
         key={i}
         addMe={addToSavedAccents}
         removeMe={removeFromSavedAccents}
         active={savedAccentNames.includes(accent.name)}
+        uppercase={props.isUppercase}
       />
     );
   });
@@ -67,12 +68,13 @@ const Home = (props) => {
     .map((accent, i) => {
       return (
         <AccentCard
-          character={accent.character}
+          characters={accent.characters}
           name={accent.name}
           key={i}
           addMe={addToSavedAccents}
           removeMe={removeFromSavedAccents}
           active={savedAccentNames.includes(accent.name)}
+          uppercase={props.isUppercase}
         />
       );
     });
@@ -100,12 +102,13 @@ const Home = (props) => {
             });
             return (
               <AccentCard
-                character={ad.character}
+                characters={ad.characters}
                 name={ad.name}
                 key={i}
                 addMe={addToSavedAccents}
                 removeMe={removeFromSavedAccents}
                 active={savedAccentNames.includes(ad.name)}
+                uppercase={props.isUppercase}
               />
             );
           })
